@@ -58,8 +58,8 @@
 (defconst citar-denote-config
   (list :name "Denote"
         :category 'file
-        :items #'citar-denote--get-notes
-        :hasitems #'citar-denote--has-notes
+        :items #'citar-denote-get-notes
+        :hasitems #'citar-denote-has-notes
         :open #'find-file
         :create #'citar-denote--create-note)
   "Instructing citar to use citar-denote functions.")
@@ -83,7 +83,7 @@ option `denote-file-type'."
   (denote
    ;;(citar-get-value "title" key)
    (read-string "Title: " (citar-get-value "title" key))
-   (citar-denote--keywords-prompt))
+   (citar-denote-keywords-prompt))
   (with-current-buffer (current-buffer)
     (goto-char (point-min))
     (while (not(eq (char-after) 10))
