@@ -77,19 +77,20 @@
             choice))))
 
 (defun citar-denote--create-note (key &optional entry)
-  "Create a bibliography note for `KEY' with properties `ENTRY'."
-  (let ((denote-file-type nil)) ; make sure it is Org
-    (denote
-     ;;(citar-get-value "title" key)
-     (read-string "Title: " (citar-get-value "title" key))
-     (citar-denote--keywords-prompt))
-    (with-current-buffer (current-buffer)
-      (goto-char (point-min))
-      (while (not(eq (char-after) 10))
-        (next-line))
-      (insert (format "#+reference:  %s" key))
-      (newline)
-      (newline))))
+  "Create a bibliography note for `KEY' with properties `ENTRY'.
+The file type for the note to be created is determined by user
+option `denote-file-type'."
+  (denote
+   ;;(citar-get-value "title" key)
+   (read-string "Title: " (citar-get-value "title" key))
+   (citar-denote--keywords-prompt))
+  (with-current-buffer (current-buffer)
+    (goto-char (point-min))
+    (while (not(eq (char-after) 10))
+      (next-line))
+    (insert (format "#+reference:  %s" key))
+    (newline)
+    (newline)))
 
 (defun citar-denote--get-notes (&optional keys)
   "Return Denote files associated with the `KEYS' list.
